@@ -4,9 +4,9 @@ export interface objDataTypes {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   image: any;
   item: string;
-  name: number;
+  name: string;
   oldPrice: number;
-  price: string;
+  price: number;
   gender?: string;
   serialNo: string;
   quantity: number;
@@ -29,4 +29,5 @@ export interface goods {
   listItems: objDataTypes[];
   numberOfItems: number;
   totalPrice: number;
+  invoice: number | string
 }

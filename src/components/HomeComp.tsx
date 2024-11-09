@@ -6,6 +6,8 @@ import { MdOutlineArrowRightAlt } from "react-icons/md";
 import { category, gender } from "@/data";
 import { categoryTypes, genderTypes } from "@/types";
 import ItemComp from "./ItemComp";
+import NavBar from "./NavBar";
+import FooterComp from "./FooterComp";
 // import { useAppDispatch, useAppSelector } from "@/hook/hook";
 // import { add } from "@/redux/itemsSlice";
 
@@ -42,6 +44,7 @@ function HomeComp() {
 
   return (
     <div>
+      <NavBar />
       <h1 className="text-black text-5xl font-bold text-center pt-[9vh] pb-[5vh]">
         Hey, there!
       </h1>
@@ -66,7 +69,7 @@ function HomeComp() {
       </div>
 
 
-      <div className="md:grid md:grid-cols-[25%_75%]">
+      <div className="md:grid md:grid-cols-[25%_75%] pb-8">
         {/* <div className="bg-[#F0F8FF]"> */}
         <div className="bg-[#faebd7 ]">
           <h3 className="pt-[13vh] p-3 text-[#a2a3a57e]">CATEGORY</h3>
@@ -133,6 +136,8 @@ function HomeComp() {
           <ItemComp itemSelected={items} />
         </div>
       </div>
+
+      <FooterComp />
     </div>
   );
 }

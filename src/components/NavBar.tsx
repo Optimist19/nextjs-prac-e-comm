@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
 
 import { BsCart4 } from "react-icons/bs";
 import { useAppSelector } from "@/hook/hook";
@@ -10,6 +9,10 @@ import ImageLogo from "./ImageLogo";
 
 function NavBar() {
   const fromStore = useAppSelector((state) => state.data);
+
+  // function handlePrint(){
+  //   window.print()
+  // }
   return (
     <div className="w-[100%]">
       <div className="px-5 lg:flex lg:justify-center lg:items-center lg:flex-col">

@@ -3,7 +3,7 @@ import { BreadcrumbCollapsed } from "@/components/Breadcrumb";
 import ImageLogo from "@/components/ImageLogo";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useAppSelector } from "@/hook/hook";
+import { useAppDispatch, useAppSelector } from "@/hook/hook";
 import Image from "next/image";
 
 import {
@@ -21,16 +21,38 @@ import {
   Select,
   TextField
 } from "@mui/material";
-import { useState } from "react";
-import { objData } from "@/data";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { invoiceNumber } from "@/redux/itemsSlice";
 
 function CheckOut() {
-  const [openAccordion, setOpenAccordion] = useState<string | undefined>(undefined);
+  const [openAccordion, setOpenAccordion] = useState<string | undefined>(
+    undefined
+  );
   const [order, setOrder] = useState(false);
 
   const stateFromStore = useAppSelector((store) => store.data);
+  const dispatch = useAppDispatch()
+
   const router = useRouter();
+
+  const [randomNumber, setRandomNumber] = useState(0);
+
+  console.log(randomNumber)
+  useEffect(() => {
+    // Function to generate a random 7-digit number
+    const generateRandomNumber = () => {
+      return Math.floor(1000000 + Math.random() * 9000000);
+    };
+
+    // Generate and dispatch the random number once
+    const number = generateRandomNumber();
+    dispatch(invoiceNumber(number));
+
+    // Update the random number in the component's state (optional)
+    setRandomNumber(number);
+  }, [dispatch]);
+
 
   const handleOpenAccordion = (id: string) => {
     setOpenAccordion(id);
@@ -79,7 +101,8 @@ function CheckOut() {
                         <div>
                           <Image
                             src={item.image}
-                            className="w-[100%]" alt={item.name}
+                            className="w-[100%]"
+                            alt="product-image"
                             priority
                           />
                         </div>
@@ -147,13 +170,13 @@ function CheckOut() {
               <div className="md:flex md:items-center md:justify-between md:border-b-2 border-t-2 md:border-t-0">
                 <div className="flex items-center justify-between">
                   <div className="py-1  ">
-                    <h2 className="text-4xl pb-1 font-medium ">
-                      Checkout
-                    </h2>
+                    <h2 className="text-4xl pb-1 font-medium ">Checkout</h2>
                   </div>
                   <p className=" md:hidden font-semibold">$58.00</p>
                 </div>
-                <p className="text-[#767657]  py-2">#767657657</p>
+                <p className="text-[#767657]  py-2">
+                  #{stateFromStore.invoice}
+                </p>
               </div>
               <div className="hidden md:block pt-2">
                 <BreadcrumbCollapsed
@@ -164,7 +187,8 @@ function CheckOut() {
 
               <div>
                 {/* <Accordion type="single" collapsible className="w-full"> */}
-                <Accordion 
+                <Accordion
+                  type="single"
                   value={openAccordion}
                   onValueChange={setOpenAccordion}
                   className="w-full">
@@ -303,16 +327,17 @@ function CheckOut() {
                       </div>
 
                       <div className="pt-8 overflow-auto h-[40vh] overflow-x-auto ">
-                        {objData.map((item) => {
+                        {stateFromStore.listItems.map((item) => {
                           return (
                             <div
                               key={item.id}
                               className="border-t-2 border-dashed flex items-center py-4">
                               <div className="border p-1 rounded-md">
-                                <img
+                                <Image
                                   src={item.image.src}
-                                  alt={item.name}
+                                  alt="product-image"
                                   className="w-[50px]"
+                                  priority
                                 />
                               </div>
 

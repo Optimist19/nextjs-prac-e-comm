@@ -121,6 +121,11 @@
   color: red !important;
  } */
 
+ .not-flexing{
+  /* display: flex;
+  justify-content: space-between !important; */
+ }
+
   body {
     @apply bg-background text-foreground;
   }

@@ -10,6 +10,7 @@ import { decrementItem, incrementItem } from "@/redux/itemsSlice";
 import Link from "next/link";
 import NavBar from "@/components/NavBar";
 import FooterComp from "@/components/FooterComp";
+import Image from "next/image";
 
 function CartPage() {
   const dispatch = useAppDispatch();
@@ -30,9 +31,9 @@ function CartPage() {
                 key={item.id}
                 className="border-b-2 py-9  grid grid-flow-col items-center ">
                 <div className="w-[26vw]">
-                  <img
+                  <Image
                     src={item.image.src}
-                    alt={item.name}
+                    alt="product-image"
                     className="w-[100%]  min-w-[100px] max-w-[200px]"
                   />
                 </div>

@@ -5,7 +5,8 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 const initialState: goods = {
   listItems: [],
   numberOfItems: 0,
-  totalPrice: 0
+  totalPrice: 0,
+  invoice: ""
 };
 
 export const ItemsSlice = createSlice({
@@ -68,12 +69,17 @@ export const ItemsSlice = createSlice({
       });
 
       state.listItems = updatedCartArray;
+    },
+
+    invoiceNumber:(state, actions: PayloadAction<number>) =>{
+console.log(actions.payload,)
+      state.invoice = actions.payload
     }
   }
 });
 
 // Action creators are generated for each case reducer function
-export const { add, incrementItem, decrementItem } = ItemsSlice.actions;
+export const { add, incrementItem, decrementItem, invoiceNumber } = ItemsSlice.actions;
 
 export default ItemsSlice.reducer;
 

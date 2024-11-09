@@ -4,9 +4,11 @@ import React, { useState } from "react";
 import ReactCountryFlagsSelect from "react-country-flags-select";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
+import { Country } from "react-country-flags-select/dist/types/ReactSelectFlagsTypes";
+
 
 function FooterComp() {
-  const [selected, setSelected] = useState(null);
+  const [selected, setSelected] = useState<Country | null>(null);
 
   return (
     <div className="px-5 bg-[#f2f7fe7f]">
@@ -16,7 +18,7 @@ function FooterComp() {
             <div className="flex flex-col">
               <ReactCountryFlagsSelect
                 selected={selected}
-                onSelect={setSelected} className="put"
+                onSelect={setSelected} 
               />
               <p className="pt-2">Shipping to:</p>
             </div>
